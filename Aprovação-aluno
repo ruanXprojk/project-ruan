@@ -1,0 +1,44 @@
+package nota;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+
+/**
+ *
+ * @author ruana
+ */
+public class Nota {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException {
+        // TODO code application logic here
+        String s = "";
+        float nota = 0;
+        float frequencia = 0;
+        
+        DataInputStream dado;
+        dado = new DataInputStream(System.in);
+        
+        System.out.println("Informe sua nota: ");
+        s = dado.readLine();
+        nota = Float.parseFloat(s);
+        
+        System.out.println("Informe sua frequencia: ");
+        s = dado.readLine();
+        frequencia = Float.parseFloat(s);
+        
+        System.out.println("Sua nota: " + nota);
+        System.out.println("Sua frequencia: " + frequencia);
+        
+        boolean notaAprovado = nota >= 18;
+        boolean frequenciaAprovado = frequencia >= 75;
+        
+        if(notaAprovado && frequenciaAprovado){
+            System.out.println("Você foi aprovado!");
+        }else{
+            System.out.println("Você foi reprovado!");
+        }
+    }
+}
