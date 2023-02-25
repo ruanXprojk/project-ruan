@@ -1,0 +1,32 @@
+package name;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+
+/**
+ *
+ * @author ruana
+ */
+public class Name {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException {
+        String s = "";
+        String name = "";
+        float idade = 0;
+        DataInputStream dado;
+        dado = new DataInputStream(System.in);
+        
+        System.out.println("Inform your name: ");
+        name = dado.readLine(); 
+        
+        System.out.println("Inform your year old: ");
+        s = dado.readLine();
+        idade = Float.parseFloat(s);
+        
+        System.out.println("Your name is " + name);
+        System.out.println("Your year old is " + idade + " anos");
+    }
+}
