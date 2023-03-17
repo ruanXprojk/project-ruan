@@ -1,0 +1,79 @@
+-- Exemplo criando database
+create database dds_2_14;
+
+-- Selecionando a database por auso use dds_2_14;
+
+use dds_2_14;
+
+-- Criando tabela
+drop table empregado;
+create table empregado(
+matricula integer not null,
+nome VARCHAR(40) not null,
+cpf CHAR(11) not null
+);
+
+-- inserindo dados
+insert into empregado(matricula, nome, cpf) values (5555, "Ramon", 959595);
+
+-- selecionado todos os empregados
+select * from empregado;
+
+-- Cuidado comando de exclusão
+drop database dds_2_14;
+
+-- Criando restrição check
+create table Persons (
+id int not null,
+lastName varchar(255) not null,
+firstName varchar(255),
+age int,
+check (age >= 18)
+);
+
+-- exemplo de limitação de idade
+insert into Persons (id, lastname, firstname, age) values (1, "Soares", "Pedro", 17);
+select * from Persons;
+
+drop table Persons;
+
+describe empregado;
+
+-- inserindo valores erro chave primaria
+insert into empregado(nome) values ("Ruan");
+insert into empregado(nome) values ("Soares");
+
+-- preenchimento chave primaria
+insert into empregado(matricula, nome) values (1, "Lucas");
+select * from empregado;
+
+-- criando tabela departamento
+create table Departamento(
+cod_depto int not null primary key auto_increment,
+nome_depto varchar(40)
+);
+
+insert into Departamento (nome_depto) values ("Vendas");
+insert into Departamento (nome_depto) values ("Financeiro");
+
+select * from Departamento;
+drop table Departamento;
+
+create table empregado(
+matricula int not null primary key auto_increment,
+nome varchar(40) not null,
+cod_dep int not null,
+constraint fk_emprego_departamento
+foreign key(cod_dep)
+
+references departamento(cod_depto)
+);
+-- inserindo empregado sem departamneto erro chave estrangeira
+insert into empregado(nome) values ("Ruan");
+
+-- select * from empregado;
+
+-- inserindo empregado em departamento inexistente
+insert into empregado(nome, cod_dep) values ("Ruan", 20);
+-- inserindo empregado em departamento existente
+insert into empregado(nome, cod_dep) values ("Ruan", 1);
