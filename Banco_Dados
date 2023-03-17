@@ -1,0 +1,43 @@
+-- Exemplo criando database
+create database dds_2_14;
+
+-- Selecionando a database por auso use dds_2_14;
+
+use dds_2_14;
+
+-- Criando tabela
+drop table empregado;
+create table empregado(
+matricula integer not null,
+nome VARCHAR(40) not null,
+cpf CHAR(11) not null
+);
+
+-- inserindo dados
+insert into empregado(matricula, nome, cpf) values (5555, "Ramon", 959595);
+
+-- selecionado todos os empregados
+select * from empregado;
+
+-- Cuidado comando de exclusão
+drop database dds_2_14;
+
+-- Criando restrição check
+create table Persons (
+id int not null,
+lastName varchar(255) not null,
+firstName varchar(255),
+age int,
+check (age >= 18)
+);
+
+-- exemplo de limitação de idade
+insert into Persons (id, lastname, firstname, age) values (1, "Soares", "Pedro", 17);
+select * from Persons;
+
+drop table Persons;
+
+describe empregado;
+
+insert into empregado(nome) values ("Ruan");
+select * from empregado;
