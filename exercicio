@@ -1,0 +1,16 @@
+create database exercicioteste;				
+use exercicioteste;
+
+create table UF(
+sigla_uf char(2) not null,
+nome_uf varchar(30) not null
+);
+insert into UF(sigla_uf, nome_uf) values ("es", "espirito santo");
+select * from UF;
+drop table UF;
+
+create table Cidade(
+cod_cidade integer not null,
+nome_cidade varchar(30) not null,
+sigla_uf char(2)
+);
