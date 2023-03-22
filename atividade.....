@@ -1,0 +1,128 @@
+create database exercicio;
+use exercicio;
+
+create table uf(
+sigla_uf char(2),
+nome_uf varchar(30)
+);
+
+insert into uf (sigla_uf, nome_uf) values (23, "ROmildo");
+select * from uf;
+drop table uf;
+
+create table cidade(
+cod_cidade integer,
+nome_cidade varchar(30),
+sigla_uf char(2) -- (FK)
+);
+
+insert into cidade (cod_cidade, nome_cidade, sigla_uf) values (245, "Rua da strada", 22);
+select * from cidade;
+drop table cidade;
+
+create table cliente(
+cod_cliente integer,
+nome_cliente varchar(40),
+rua varchar(35),
+numero char(6),
+bairro varchar(25),
+cod_cidade integer, -- (FK)
+cep char(8),
+sexo char(1)
+);
+insert into cliente(cod_cliente, nome_cliente, rua, numero, bairro, cod_cidade, cep, sexo) values
+ (1, "Romildo", "Rua Olimpiadas", 444444, "São Francisco", 0222, 12345678, 'M');
+select * from cliente;
+drop table cliente;
+
+create table telefone(
+cod_cliente integer, -- (FK)
+numero_telefone char(12)
+);
+insert into telefone(cod_cliente, numero_telefone) values (231, 279430114572);
+select * from telefone;
+drop table telefone;
+
+create table ordem_servico(
+numero_os char(6),
+data_os date,
+hora_os time,
+cod_cliente integer, -- (FK)
+matricula_atendente char(6), -- (FK)
+descricao_problema varchar(200),
+descricao_fechamento varchar(200),
+posicao_os char(1),
+valor_total_os numeric(9,2)
+);
+insert into ordem_servico(numero_os, data_os, hora_os, cod_cliente, matricula_atendente, descricao_problema, descricao_fechamento, posicao_os, valor_total_os)
+ values (111111, 120115, 21, 4, 240016, "Possui um pequeno erro ao fazer acesso em seu login de estudante", "Fazer analize para solicitar uma equipe de resgate", 2, 910000);
+ select * from ordem_servico;
+ drop table ordem_servico;
+
+create table atendente(
+matricula_atendente char(6),
+nome_atendente varchar(30)
+);
+insert into atendente(matricula_atendente, nome_atendente) values (012237, "Antônio d. Souza Ramos");
+select * from atendente;
+drop table atendente;
+
+create table servico_executado(
+numero_os char(6), -- (FK)
+cod_servico integer, -- (FK)
+cod_tecnico integer, -- (FK)
+data_inicial date,
+hora_inicial_servico time,
+data_final_servico date,
+hora_final_servico time,
+valor_cobrado_servico numeric(9,2)
+);
+insert into servico_executado(numero_os, cod_servico, cod_tecnico, data_inicial, hora_inicial_servico, data_final_servico, hora_final_servico, valor_cobrado_servico)
+ values (222634, 0222, 4443, 12042010, 1655, 23032011, 1920, 430000);
+ select * from servico_executado;
+ drop table servico_executado;
+
+create table tecnico(
+cod_servico integer,
+nome_tecnico varchar(35),
+terceiro char(1)
+);
+insert into tecnico(cod_servico, nome_tecnico, terceiro) values (211, "Robson Neves", 7);
+select * from tecnico;
+drop table tecnico;
+
+create table servico(
+cod_servico integer,
+nome_servico varchar(30),
+estimativa_tempo integer,
+valor_servico numeric(9,2)
+);
+insert into servico(cod_servico, nome_servico, estimativa_tempo, valor_servico) values (1111, "Manuntenção de sistema", 745000, 30000000);
+select * from servico;
+drop table servico;
+
+create table servico_executado_estoque(
+numero_os char(6), -- (FK)
+cod_servico integer, -- (fk)
+cod_estoque integer, -- (fk)
+data_uso date,
+hora_uso time,
+quantidade_uso numeric(9,2)
+);
+insert into servico_executado_estoque(numero_os, cod_servico, cod_estoque, data_uso, hora_uso, quantidade_uso)
+ values (777777, 215, 7894, 5091922, 14, 18);
+ select * from servico_executado_estoque;
+ drop table servico_executado_estoque;
+
+create table estoque(
+cod_estoque integer,
+descricao_estoque varchar(30),
+valor_compra numeric(9,2),
+quantidade_estoque numeric(8,2)
+);
+insert into estoque(cod_estoque, descricao_estoque, valor_compra, quantidade_estoque) values (33, "Estoque de packs de códigos", 3000, 42);
+select * from estoque;
+drop table estoque;
+
+select * from exercicio;
+drop database exercicio;
