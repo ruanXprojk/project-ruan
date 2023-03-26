@@ -1,0 +1,24 @@
+FileWriter arq = null;
+        try {
+            arq = new FileWriter("C:\\Users\\ruana\\Desktop\\netbeans\\parceria.txt");
+        }catch (IOException ex){
+            Logger.getLogger(Parceria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PrintWriter gravarArq = new PrintWriter(arq);
+        gravarArq.printf("---------Registro do Parceiro---------" + "\n");
+        gravarArq.printf("Nome: " + text_nome.getText() + "\n");
+        gravarArq.printf("Cep: " + text_cep.getText() + "\n");
+        gravarArq.printf("Cidade: " + text_cidade.getText() + "\n");
+        gravarArq.printf("Bairro: " + text_bairro.getText() + "\n");
+        gravarArq.printf("Email: " + text_email.getText() + "\n");
+        gravarArq.printf("Telefone: " + text_telefone.getText() + "\n");
+        gravarArq.printf("Endereço: " + text_endereco.getText() + "\n");
+        gravarArq.printf("Número: " + text_numero.getText() + "\n");
+        gravarArq.printf("CNPJ: " + text_cnpj.getText() + "\n");
+        
+        try{
+            arq.close();
+        }catch (IOException ex){
+            Logger.getLogger(Parceria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
