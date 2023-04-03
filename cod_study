@@ -1,0 +1,23 @@
+FileWriter arq = null;
+        try {
+            arq = new FileWriter("C:\\Users\\aluno\\Desktop\\cadastroUser.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PrintWriter gravarArq = new PrintWriter(arq);
+        
+        
+        gravarArq.println("Cadastro Usuário");
+        gravarArq.println("----------------------------");
+        gravarArq.println("Nome Completo: " + text_nome.getText());
+        gravarArq.println("Nome de Usuário: " + text_usuario.getText());
+        gravarArq.println("Email: " + text_email.getText());
+        gravarArq.println("Série: " + select_series.getSelectedItem().toString());
+        gravarArq.println("Senha: " + text_senha.getText());
+        gravarArq.println("Confirma Senha: " + text_confirmar_senha.getText());
+        
+        try {
+            arq.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
