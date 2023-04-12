@@ -1,0 +1,25 @@
+create database mykaelprof;
+use mykaelprof;
+
+create user ruan identified by 'ruanx16';
+drop user ruan;
+
+create table usuario(
+id bigint(10) primary key auto_increment,
+nome varchar(255),
+cpf char(11),
+email varchar(255),
+telefone char(12)
+);
+
+insert into usuario(nome, cpf, email, telefone)values('Ruan Gustavo Soares da Silva',22095115724,'ruan.silva1@gmail.com',988045322);
+insert into usuario(nome, cpf, email, telefone)values('Kayo Gabriel Soares da Silva', 17487115713, 'kayo.silva6@aluno.senai.br', 988839618);
+insert into usuario(nome, cpf, email, telefone)values('João Pessin', 12345678900, 'joao.pessin@aluno.senai.br', 027992946556);
+insert into usuario(nome, cpf, email, telefone)values('WICTOR RICHARD GONÇALVES OLIVEIRA', 13902444743, 'clashpfclanswe@gmail.com', 27992375343);
+insert into usuario(nome, cpf, email, telefone)values('Lucas Rodrigues Amorim', 18121256747, 'lucas3amorim@gmail.com', 27997985858);
+insert into usuario(nome, cpf, email, telefone)values('Caio Anacleto', 17645635422, 'Caio.anacleto10@gmail.com', 27995792682);
+insert into usuario(nome, cpf, email, telefone)values('Gabriel Souza', 17624694727, 'biel_souza99@hotmail.com', 997325512);
+insert into usuario(nome, cpf, email, telefone)values('Mykael Deolindo', 05515404768, 'mykaelds@gmail.com', 988531651);
+
+select * from usuario;
+describe usuario;
