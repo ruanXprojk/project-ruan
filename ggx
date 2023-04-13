@@ -1,0 +1,61 @@
+create database ggx;
+use ggx;
+
+create user 'silva'@'localhost' identified by 'silvadds';
+grant select, insert, alter, update on projeto.* to 'silva';
+
+create table fato_emprestimo(
+id_tempo int primary key auto_increment,
+id_livro int primary key auto_increment,
+id_assunto int primary key auto_increment,
+id_cidade int primary key auto_increment
+);
+
+drop table fato_emprestimo;
+
+create table dim_tempo(
+id_tempo int,
+mes int(2),
+ano int(4),
+constraint fk_dim_tempo_fato_emprestimo
+foreign key dim_tempo(id_tempo) references fato_emprestimo(id_tempo)
+);
+insert into dim_tempo(mes, ano)values(02, 2011),(11, 2001),(22, 2019);
+select * from dim_tempo;
+drop table dim_tempo;
+
+create table dim_assunto(
+id_assunto int,
+descricao varchar(100),
+constraint fk_dim_assunto_fato_emprestimo
+foreign key dim_assunto(id_assunto) references fato_emprestimo(id_assunto)
+);
+insert into dim_assunto(descricao)values('Este livro possue dicas de como cozinhar'),('this book to teach how do a ice cream'),('maratona completa de devdojo');
+select * from dim_assunto;
+drop table dim_assunto;
+
+create table dim_cidade(
+id_cidade int,
+nome_cidade varchar(255),
+constraint fk_dim_cidade_fato_emprestimo
+foreign key dim_cidade(id_cidade) references fato_emprestimo(id_cidade)
+);
+insert into dim_cidade(nome_cidade)values('Rua Almeida d. Fraga'),('Rua da Peira'),('São robert d. Leronson');
+select * from dim_cidade;
+drop table dim_cidade;
+
+
+create table dim_livro(
+id_livro int,
+nome varchar(100),
+autor varchar(255),
+ano int(4),
+editora varchar(100),
+constraint fk_dim_livro_fato_emprestimo
+foreign key dim_livro(id_livro) references fato_emprestimo(id_livro)
+);
+insert into dim_livro(nome, autor, ano, editora)values('junior', 'robson charles', 2000, 'sbt'),('Sesar', 'rodrigo golçalvez', 1998, 'globo lixo'),('soares', 'richard neves de freitas', 1990, 'record');
+select * from dim_livro;
+drop table dim_livro;
+
+drop database ggx;
