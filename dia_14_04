@@ -1,0 +1,130 @@
+create database companhia_aerea;
+use companhia_aerea;
+
+create table voo(
+id_voo int not null primary key,
+data_ini datetime,
+duracao_horas time,
+local_destino varchar(100),
+local_partida varchar(100),
+id_piloto int not null,
+id_aviao int not null,
+constraint fk_id_aviao foreign key (id_aviao) references aviao (id_aviao),
+constraint fk_id_piloto foreign key (id_piloto) references piloto (id_piloto),
+constraint pk_aviao_piloto primary key (id_aviao, id_piloto)
+);
+
+create table aviao(
+id_aviao int not null primary key,
+nome_aviao varchar(40),
+id_modelo int not null
+);
+
+create table modelo(
+id_modelo int not null primary key,
+nome_modelo varchar(40),
+constraint fk_id_piloto foreign key (id_piloto) references piloto (id_piloto),
+constraint fk_id_aviao foreign key (id_aviao) references aviao (id_aviao)
+);
+
+create table piloto(
+id_piloto int not null primary key,
+nome varchar(200),
+cpf char(11),
+qtd_voos_agendados int
+);
+
+create table piloto_modelo(
+id_piloto int not null,
+id_modelo int not null,
+constraint fk_id_piloto foreign key (id_piloto) references piloto (id_piloto),
+constraint fk_id_modelo foreign key (id_modelo) references modelo (id_modelo),
+constraint pk_piloto_modelo primary key (id_piloto1, id_modelo1)
+);
+select * from companhia_aerea;
+drop database companhia_aerea;
+
+create table companhia(
+id int not null primary key auto_increment,
+nome varchar(200) not null
+);
+
+insert into companhia(nome)values
+('gol'),
+('aguia branca'),
+('itapemerim'),
+('latam');
+
+select * from companhia;
+
+create table modelo(
+id int not null primary key auto_increment,
+nome varchar(250) not null
+);
+describe modelo;
+insert into modelo(nome)values
+('monomotor'),
+('bimotor'),
+('turbo helice'),
+('jato'),
+('helicoptero');
+
+create table aviao(
+id int not null primary key auto_increment,
+nome varchar(250),
+id_companhia int not null,
+constraint fk_companhia foreign key (id_companhia)references companhia(id),
+constraint fk_modelo foreign key (id_modelo) references modelo(id)
+);
+drop database companhia_aerea;
+insert into aviao(nome, id_companhia, id_modelo)values
+('boeing 747', 1, 2),
+('air bus a340', 3, 1),
+('mc donnell dc-10', 2, 4),
+('antonov an22', 1, 4);
+
+-- select a.nome 'Nome Avião', c.nome 'Companhia Aerea', m.nome 'Modelo'
+-- from aviao as a join companhia as c on a.id_companhia = c.id;
+
+select a.nome 'Nome Avião', c.nome 'Companhia Aerea', m.nome 'Modelo'
+from aviao as a join companhia as c on a.id_companhia = c.id
+join modelo as m on a.id_modelo= m.id
+order by a.id_modelo
+;
+
+create table piloto(
+id int not null primary key auto_increment,
+id_companhia int not null,
+nome varchar(255) not null,
+cpf char(11) not null unique,
+qtd_voos_agendados int,
+constraint `fk_piloto_companhia` foreign key (`id_companhia`) references `companhia`(`id`)
+);
+
+insert into piloto(id_companhia, nome, cpf)values
+(1, 'Ramom Nascimento', '12345678901'),
+(2, 'Lucas de Lima', '22234524555'),
+(3, 'Veronica de souza', '12341234567'),
+(4, 'Patricia de Lima', '55555643217'),
+(5, 'Josue da Silva', '12345443215');
+
+select * from piloto;
+
+create table piloto_modelo(
+id_piloto int not null,
+id_modelo int not null,
+constraint pk_piloto_modelo primary key(id_piloto, id_modelo),
+constraint fk_piloto_modelo foreign key(id_piloto)references piloto(id),
+constraint fk_modelo_piloto foreign key(id_piloto)references modelo(id)
+);
+describe piloto_modelo;
+insert into piloto_modelo(id_piloto, id_modelo)values
+(1,1),(1,2),(1,3),(1,4),(1,5),
+(2,1),(2,2),(2,3),(2,4),(2,5),
+(3,1),(3,2),(3,3),(3,4),(3,5),
+(4,1),(4,2),(4,3),(4,4),(4,5),
+(5,1),(5,2),(5,3),(5,4),(5,5);
+
+select p.nome Nome, m.nome Modelo from piloto_modelo as pm
+join piloto as p on pm.id_piloto = p.id
+join modelo as m on pm.id_modelo = m.id;
