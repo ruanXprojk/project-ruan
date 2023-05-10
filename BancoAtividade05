@@ -1,0 +1,16 @@
+create database campos;
+use campos;
+
+create table DescricaoProduto(
+nomeProduto varchar(300),
+CNPJ int not null,
+fornecedor varchar(300),
+valor numeric(9,2),
+materiaPrima varchar(300)
+);
+
+insert into DescricaoProduto(nomeProduto, CNPJ, fornecedor, valor, materiaPrima)values('Camiseta tubarão raivoso', 3029384, 'Anomaly Shirts', 200.75, 'Tecido fino importado da França');
+update DescricaoProduto set CNPJ = '?' where CNPJ = '?';
+delete from DescricaoProduto where CNPJ = '3029384';
+
+select * from DescricaoProduto;
